@@ -13,7 +13,8 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-import {RestaurantsContextProvider} from "./src/services/restaurants/restaurants.context";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,21 +60,23 @@ export default function App() {
   return (
     <>
         <ThemeProvider theme={theme}>
+            <LocationContextProvider>
             <RestaurantsContextProvider>
-                <NavigationContainer>
-                    <Tab.Navigator
-                        screenOptions={createScreenOptions}
-                        tabBarOptions={{
-                            activeTintColor: "tomato",
-                            inactiveTintColor: "gray",
-                        }}
-                    >
-                        <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                        <Tab.Screen name="Map" component={Map} />
-                        <Tab.Screen name="Settings" component={Settings} />
-                    </Tab.Navigator>
-                </NavigationContainer>
-            </RestaurantsContextProvider>
+                    <NavigationContainer>
+                        <Tab.Navigator
+                            screenOptions={createScreenOptions}
+                            tabBarOptions={{
+                                activeTintColor: "tomato",
+                                inactiveTintColor: "gray",
+                            }}
+                        >
+                            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                            <Tab.Screen name="Map" component={Map} />
+                            <Tab.Screen name="Settings" component={Settings} />
+                        </Tab.Navigator>
+                    </NavigationContainer>
+                </RestaurantsContextProvider>
+            </LocationContextProvider>
         </ThemeProvider>
       <StatusBar style="auto" />
     </>
