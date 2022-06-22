@@ -15,7 +15,7 @@ import { FavouritesContextProvider } from "./src/services/favourites/favourites.
 
 
 const firebaseConfig = {
-        apiKey: "AIzaSyBww2u-K099-k1Y",
+        apiKey: "AIzaSyBww2u-K099-kzgLQUhVyFahbXwf9yHY1Y",
         authDomain: "mealstogo-5c7fe.firebaseapp.com",
         projectId: "mealstogo-5c7fe",
         storageBucket: "mealstogo-5c7fe.appspot.com",
@@ -35,6 +35,7 @@ export default function App() {
                 .auth()
                 .signInWithEmailAndPassword("mo@binni.io", "test123")
                 .then((user) => {
+                    console.log(user);
                     setIsAuthenticated(true);
                 })
                 .catch((e) => {
