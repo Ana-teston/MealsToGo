@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import * as firebase from "firebase";
@@ -9,9 +9,6 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 
@@ -45,13 +42,7 @@ export default function App() {
     <>
         <ThemeProvider theme={theme}>
             <AuthenticationContextProvider>
-                <FavouritesContextProvider>
-                    <LocationContextProvider>
-                        <RestaurantsContextProvider>
-                            <Navigation />
-                        </RestaurantsContextProvider>
-                    </LocationContextProvider>
-                </FavouritesContextProvider>
+                <Navigation />
             </AuthenticationContextProvider>
         </ThemeProvider>
       <StatusBar style="auto" />
