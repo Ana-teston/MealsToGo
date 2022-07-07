@@ -29,7 +29,6 @@ export const RestaurantsContextProvider = ({ children }) => {
             retrieveRestaurants(locationString);
         }
     }, [location]);
-
     return (
         <RestaurantsContext.Provider
             value={{
