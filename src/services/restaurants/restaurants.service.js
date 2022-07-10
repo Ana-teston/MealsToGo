@@ -1,11 +1,12 @@
-
 import camelize from "camelize";
+import { host, isMock } from "../../utils/env";
 
 export const restaurantsRequest = (location) => {
-    return fetch(`http://localhost:5001/mealstogo-5c7fe/us-central1/placesNearby?location=${location}`
-    ).then((res) => {
-        return res.json();
-    });
+    return fetch(`${host}/placesNearby?location=${location}&mock=${isMock}`).then(
+        (res) => {
+            return res.json();
+        }
+    );
 };
 
 export const restaurantsTransform = ({ results = [] }) => {
@@ -17,5 +18,6 @@ export const restaurantsTransform = ({ results = [] }) => {
             isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
         };
     });
+
     return camelize(mappedResults);
 };

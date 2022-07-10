@@ -1,20 +1,24 @@
-import React,   { useState, useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
-import { Search } from "../component/search.component"
+
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import {MapCallout} from "../component/map-callout.components";
+
+import { Search } from "../component/search.component";
+import { MapCallout } from "../component/map-callout.components";
 
 const Map = styled(MapView)`
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 `;
 
-export const MapScreen = ({navigation}) => {
+const RestaurantMap = ({ navigation }) => {
     const { location } = useContext(LocationContext);
-    const { restaurants } = useContext(RestaurantsContext);
+    const { restaurants = [] } = useContext(RestaurantsContext);
+
     const [latDelta, setLatDelta] = useState(0);
+
     const { lat, lng, viewport } = location;
 
     useEffect(() => {
@@ -32,7 +36,7 @@ export const MapScreen = ({navigation}) => {
                     latitude: lat,
                     longitude: lng,
                     latitudeDelta: latDelta,
-                    longitudeDelta: 0.02,
+                    longitudeDelta: 0.01,
                 }}
             >
                 {restaurants.map((restaurant) => {
@@ -60,4 +64,19 @@ export const MapScreen = ({navigation}) => {
             </Map>
         </>
     );
+};
+
+export const MapScreen = ({ navigation }) => {
+    const { location } = useContext(LocationContext);
+    if (!location) {
+        return (
+            <Map
+                region={{
+                    latitude: 0,
+                    longitude: 0,
+                }}
+            />
+        );
+    }
+    return <RestaurantMap navigation={navigation} />;
 };

@@ -13,6 +13,8 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.16",
+    "@react-native-async-storage/async-storage": "^1.17.7",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0"
   },
